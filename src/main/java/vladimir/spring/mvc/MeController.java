@@ -2,10 +2,9 @@ package vladimir.spring.mvc;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
-import javax.servlet.http.HttpServletRequest;
+import vladimir.spring.mvc.model.Employee;
 
 @Controller
 public class MeController {
@@ -16,7 +15,8 @@ public class MeController {
     }
 
     @RequestMapping("/ask")
-    public String askEmployeeDetails() {
+    public String askEmployeeDetails(Model model) {
+        model.addAttribute("employee", new Employee());
         return "ask-emp-details-view";
     }
 
@@ -28,12 +28,7 @@ public class MeController {
 //        return "show-emp-details-view";
 //    }
 
-    /**
-     * Можно делать через HttpServletRequest
-     * @param empName
-     * @param model
-     * @return
-     */
+
 //    @RequestMapping("/show")
 //    public String showEmpDetails(HttpServletRequest request, Model model) {
 //        String empName = request.getParameter("employeeName");
@@ -44,19 +39,16 @@ public class MeController {
 //
 //        return "show-emp-details-view";
 //    }
+    @RequestMapping("/showEmpDetails")
+    public String showEmpDetails(@ModelAttribute("employee") Employee employee) {
+        String name = employee.getName();
+        employee.setName("Mr. " + name);
 
-    /**
-     * Тоже самое что и HttpServletRequest но белее короче через @RequestParam
-     * @param empName
-     * @param model
-     * @return
-     */
-    @RequestMapping("/show")
-    public String showEmpDetails(@RequestParam("employeeName") String empName, Model model) {
-        empName = "Mr. " + empName;
+        String surname = employee.getSurname();
+        employee.setSurname(surname);
 
-        model.addAttribute("nameAttribute", empName);
-        model.addAttribute("description", "- java developer");
+        int salary = employee.getSalary();
+        employee.setSalary(salary * 2);
 
         return "show-emp-details-view";
     }
