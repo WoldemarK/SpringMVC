@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import vladimir.spring.mvc.model.Employee;
 
+import javax.validation.Valid;
+
 @Controller
 public class MeController {
 
@@ -40,7 +42,7 @@ public class MeController {
 //        return "show-emp-details-view";
 //    }
     @RequestMapping("/showEmpDetails")
-    public String showEmpDetails(@ModelAttribute("employee") Employee employee) {
+    public String showEmpDetails(@Valid @ModelAttribute("employee") Employee employee) {
         String name = employee.getName();
         employee.setName("Mr. " + name);
 
