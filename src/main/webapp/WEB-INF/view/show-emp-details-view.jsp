@@ -12,7 +12,6 @@
 <%--Your name: ${param.employeeName}--%>
 <%--Your name: ${nameAttribute} ${description }--%>
 Your name: ${employee.name}
-<form:errors path="name"/>
 <br>
 Your surname: ${employee.surname}
 <br>
@@ -28,9 +27,8 @@ Your Language (s):
         <li> ${lang} </li>
     </c:forEach>
 </ul>
+
 <br>
-
-
 </body>
 
 </html>

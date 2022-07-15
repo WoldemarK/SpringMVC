@@ -16,9 +16,11 @@
 <form:form action="showEmpDetails" modelAttribute="employee">
 
     Name<form:input path="name"/>
+    <form:errors path="name"/>
     <br>
     <br>
     Surname<form:input path="surname"/>
+    <form:errors path="surname"/>
     <br>
     <br>
     Salary<form:input path="salary"/>
@@ -26,6 +28,7 @@
     <br>
     Department <form:select path="department">
     <form:options items="${employee.departments}"/>
+
 
 </form:select>
     <br>
@@ -41,6 +44,7 @@
     <br>
     <br>
     <form:checkboxes path="languages" items="${employee.languageMap}"/>
+
     <br>
     <br>
     <input type="submit" value="OK!">
