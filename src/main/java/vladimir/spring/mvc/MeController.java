@@ -2,6 +2,7 @@ package vladimir.spring.mvc;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import vladimir.spring.mvc.model.Employee;
@@ -42,16 +43,13 @@ public class MeController {
 //        return "show-emp-details-view";
 //    }
     @RequestMapping("/showEmpDetails")
-    public String showEmpDetails(@Valid @ModelAttribute("employee") Employee employee) {
-        String name = employee.getName();
-        employee.setName("Mr. " + name);
+    public String showEmpDetails(@Valid @ModelAttribute("employee") Employee employee,
+                                 BindingResult bindingResult) {
 
-        String surname = employee.getSurname();
-        employee.setSurname(surname);
-
-        int salary = employee.getSalary();
-        employee.setSalary(salary * 2);
-
-        return "show-emp-details-view";
+        if (bindingResult.hasErrors()) {
+            return "ask-emp-details-view";
+        } else {
+            return "show-emp-details-view";
+        }
     }
 }
